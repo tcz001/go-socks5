@@ -113,6 +113,7 @@ func (s *Server) handleRequest(req *Request, conn conn) error {
 	dest := req.DestAddr
 	if dest.FQDN != "" {
 		ctx_, addr, err := s.config.Resolver.Resolve(ctx, dest.FQDN)
+		fmt.Printf("Resolve: ctx_ %#v,addr %#v\n", ctx_, addr)
 		if err != nil {
 			if err := sendReply(conn, hostUnreachable, nil); err != nil {
 				return fmt.Errorf("Failed to send reply: %v", err)
